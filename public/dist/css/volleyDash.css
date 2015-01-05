@@ -1,0 +1,82 @@
+
+
+body {
+    font-family:sans-serif;
+    background-color: "#000";
+}
+
+div label input {
+   margin-right:0px;
+
+}
+
+
+
+#ck-button {
+    margin:5px;
+    background-color:#EFEFEF;
+    border-radius:50px;
+    border:5px solid #fff;
+    overflow:auto;
+    float:left;
+    height: 65px;
+    width: 65px;
+}
+
+#ck-button:hover {
+    background: #265a88;
+}   
+
+#ck-button label {
+    float:left;
+    width:4.0em;
+    font-size: 30px;
+    color: #999;
+}
+
+#ck-button  #playerNumberButton label {
+    color: ##265a88;
+}
+
+#ck-button label span {
+    text-align:center;
+    padding:3px 0px;
+    display:block;
+}
+
+#ck-button label input {
+    position:absolute;
+    top:-20px;
+    visibility: hidden;
+}
+
+#ck-button input:checked + span {
+    background-color:#911;
+    color:#fff;
+}
+
+.tileHeader {
+    color: #fff;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.court {
+    width: 80%;
+    padding: 20px;
+    border-style: solid;
+    border-color: #fff;
+
+}
+
+.myMarker {
+    position: relative;
+    visibility: visible;
+}
+
+.playerNumberButton {
+    color: #000;
+}

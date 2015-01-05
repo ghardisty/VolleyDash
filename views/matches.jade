@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1.
+        Matches Right Here
+    P        
+    a(href="/matches/newmatch")= "Create a New Match"
+    P
+    ul
+        each match, i in matches
+            li
+                a(href="/index.html?id=#{match._id}")= match.name 
+                &nbsp;&nbsp
+                //a(href="/matches/deleteById?id=#{match._id}")= "Delete"
+
+

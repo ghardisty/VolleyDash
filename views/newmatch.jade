@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1= title
+    a(href="/matches")= "List of All Matches"
+    p
+    form#formAddMatch(name="addmatch",method="post",action="/matches/addmatch")
+        input#inputHomeTeam(type="text", placeholder="Home Team", name="home")
+        input#inputOpponent(type="text", placeholder="Opponent", name="opponent")
+        button#btnSubmit(type="submit") submit
