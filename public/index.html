@@ -1,601 +1,125 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>Volley-Dash</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 		<link href="../dist/css/volleyDash.css" rel="stylesheet">
-		<!-- Bootstrap --><link href="../dist/css/bootstrap.min.css" rel="stylesheet">
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/ html5shiv.js"></script>
-		 <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/ respond.min.js"></script> <![endif]--> 
-		 <!-- volleyDash -->
+		<link href="../dist/css/bootstrap.min.css" rel="stylesheet">
 	</head>
-
 	    <!-- jQuery Version 1.11.2 	 -->
 	<script type="text/javascript" src="../dist/js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="../dist/js/bootstrap.min.js"></script>
 
-<style>
-div {
-	border-style: none;
-	border-color: #ccc;
-	border-width: 0px;
-}
-
-.score {
-	font-size: 42px;
-}
- 
-.player {
-font-size: 24px; 
-border-style:solid; 
-padding-top: 10px;
-padding-bottom: 10px; 
-margin-top: 10px;
-margin-bottom: 10px;
-margin-left:8%;
-margin-right: 15%;
-border-color: '#fff';
-border-width: 2px;
-border-radius: 25px;
-text-align: center;
-width: 200px;
-}
-
-
-.player:hover {
-    background: #fff;
-    color: #337ab7;
-}  
-
-.player:active {
-    background: #fff;
-    color: #000;
-}  
-
-
-.skill {
-font-size: 24px; 
-border-style:solid; 
-padding-top: 10px;
-padding-bottom: 10px; 
-margin-top: 10px;
-margin-bottom: 10px;
-margin-left:8%;
-margin-right: 15%;
-border-color: '#fff';
-border-width: 2px;
-border-radius: 25px;
-text-align: center;
-width: 200px;
-}
-
-
-.skill:hover {
-    background: #fff;
-    color: #3c763d;
-}  
-
-.skill:active {
-    background: #fff;
-    color: #000;
-}  
-
-
-</style>
-
-	<body style="background-color: #000">
+	<body>
 		<div class="container-fluid">	
-			<form class="form">	
+			<form class="form">
+				<!-- Header -->
 				<div class="row">
-					<div class="col-lg-12" style="color: #fff; height: 40px">
-						<!-- <div class="col-lg-3">Menu</div> -->
-						<div class="col-lg-12 headerTitle text-center" id="headerTitle" style="font-size:20px;"></div>
+					<div class="col-lg-12">
+						<div class="col-lg-12 headerTitle text-center" id="headerTitle"></div>
 					</div>
 				</div>
 
-				<div class="row">
-
-					<!-- Left Menu -->
-					<!--<div class="col-lg-1" style="color: #fff">
-											<div id="docInfo"></div>
-					</div>
-				-->
+				<!--Start the input sensor information  -->
+				<div class="row">	
 
 					<!-- Player Number Entry -->
-					<div class="col-lg-2">
-						<div class="row btn-primary">
-							<div class="col-sm-12 col-md-12 col-lg-12">
-								<label class="tileHeader">Player</label>
-							</div>
+					<div class="col-sm-6 panel panel-default">
+						<div class="col-sm-8 panel-heading">Player </div>
+						<div class="col-sm-4 panel-heading" onClick="rotate();">R</div>						
+						<div class="col-sm-12 panel-body" id="putPlayersOnCourt"></div>
 
-							<div class="col-lg-12 player">
-								<div onClick="OnChangePlayer(this);">Emily</div>
-							</div>
-
-							<div class="col-lg-12 player">
-								<div onClick="OnChangePlayer(this);">Karenna</div>
-							</div>
-
-							<div class="col-lg-12 player">
-								<div onClick="OnChangePlayer(this);">Marissa</div>
-							</div>
-
-							<div class="col-lg-12 player">
-								<div onClick="OnChangePlayer(this);">Sabrina</div>
-							</div>
-
-							<div class="col-lg-12 player">
-								<div onClick="OnChangePlayer(this);">Makenzi</div>
-							</div>
-
-							<div class="col-lg-12 player">
-								<div onClick="OnChangePlayer(this);">Maddie</div>
-							</div>
-
-							<div class="col-lg-12 player">
-								<div onClick="OnChangePlayer(this);">Peyton</div>
-							</div>
-
-							<div class="col-lg-12 player">
-								<div onClick="OnChangePlayer(this);">Athena</div>
-							</div>
-
-							<div class="col-lg-12 player">
-								<div onClick="OnChangePlayer(this);">Courtney</div>
-							</div>
-
-							<div class="col-lg-12 player">
-								<div onClick="OnChangePlayer(this);">Evie</div>
-							</div>
-
-						</div>
+						<div class="col-sm-12 panel-heading">Bench </div>				
+						<div class="col-sm-12 panel-body" id="putPlayersOnBench"></div>
 					</div>
 
 					<!-- Skill Entry -->
-					<div class="col-lg-2">
-						<div class="row btn-success">
-							<div class="col-sm-12 col-md-12 col-lg-12">
-								<label class="tileHeader">Skill</label>
-							</div>
-
-							<div class="col-lg-12 skill" onClick="OnChangeSkill(this);">Serve</div>
-							<div class="col-lg-12 skill" onClick="OnChangeSkill(this);">Pass</div>
-							<div class="col-lg-12 skill" onClick="OnChangeSkill(this);">Set</div>
-							<div class="col-lg-12 skill" onClick="OnChangeSkill(this);">Attack</div>
-							<div class="col-lg-12 skill" onClick="OnChangeSkill(this);">Defense</div>
-							<div class="col-lg-12 skill" onClick="OnChangeSkill(this);">Block</div>
-							<div class="col-lg-12 skill" onClick="OnChangeSkill(this);">Block Attempt</div>
-
-						</div>
-					</div>
-
-					<!-- Result Entry -->
-					<div class="col-lg-2">
-						<div class="row btn-warning">
-							<div class="col-sm-12 col-md-12 col-lg-12">
-								<label class="tileHeader">Result</label>
-							</div>
-
-							<div class="col-lg-12 skill" onClick="OnChangeResult(this);">* Terminate *</div>
-							<div class="col-lg-12 skill" onClick="OnChangeResult(this);">3 | +</div>
-							<div class="col-lg-12 skill" onClick="OnChangeResult(this);">2 | /</div>
-							<div class="col-lg-12 skill" onClick="OnChangeResult(this);">1 | -</div>
-							<div class="col-lg-12 skill" onClick="OnChangeResult(this);">0 | e</div>
-							
+					<div class="col-lg-2 panel panel-default">
+						<div class="col-lg-12 panel-heading">Skill</div>
+						<div class="panel-body">
+							<div class="col-lg-12 skill myButton" onClick="OnChangeSkill(this);">Serve</div>
+							<div class="col-md-4 col-lg-12 skill myButton" onClick="OnChangeSkill(this);">Pass</div>
+							<div class="col-md-4 col-lg-12 skill myButton" onClick="OnChangeSkill(this);">Set</div>
+							<div class="col-md-4 col-lg-12 skill myButton" onClick="OnChangeSkill(this);">Attack</div>
+							<div class="col-md-4 col-lg-12 skill myButton" onClick="OnChangeSkill(this);">Defense</div>
+							<div class="col-md-4 col-lg-12 skill myButton" onClick="OnChangeSkill(this);">Block</div>
+							<div class="col-md-4 col-lg-12 skill myButton" onClick="OnChangeSkill(this);">Block Attempt</div>
+							<div class="col-md-4 col-lg-12 skill myButton" onClick="addNewSkill(this);">Add a new skill</div>
 
 						</div>						
 					</div>
 
-
-					<!-- Location Entry -->
-					<div class="col-lg-3">
-						<div class="row btn-primary">
-							<div class="col-lg-12">
-								<label class="tileHeader">Location</label>
-							</div>
-							
-							<div class="col-lg-12" id="court" style="padding-top: 20px; ">
-								<div id="locationOpponent"class="col-lg-12" style="width: 330px ;height: 220px; border-style: solid; border-color: #fff; border-width:2px;">Opponent
-								</div>
-								<div class="col-lg-12" style="width: 330px ;height: 110px; border-style: solid; border-color: #fff; border-width:2px;">Attack
-								</div>
-
-								<div class="col-lg-12" style="width: 330px ;height: 110px; border-style: solid; border-color: #fff; border-width:2px;">Attack
-								</div>
-
-								<div id="locationHome" class="col-lg-12" style="width: 330px ;height: 220px; border-style: solid; border-color: #fff; border-width:2px;">Home
-								</div>
-							</div>
+					<!-- Result Entry -->
+					<div class="col-lg-2 panel panel-default">
+						<div class="col-lg-12 panel-heading">Result</div>
+						<div class="panel-body">
+							<div class="col-lg-12 result myButton" onClick="OnChangeResult(this);">* Terminate *</div>
+							<div class="col-lg-12 result myButton" onClick="OnChangeResult(this);">3 | +</div>
+							<div class="col-lg-12 result myButton" onClick="OnChangeResult(this);">2 | /</div>
+							<div class="col-lg-12 result myButton" onClick="OnChangeResult(this);">1 | -</div>
+							<div class="col-lg-12 result myButton" onClick="OnChangeResult(this);">0 | e</div>
+							<div class="col-lg-12 result myButton" onClick="addNewResult(this);">Add a new result</div>
 						</div>
 					</div>
 
+					<!-- Location Entry -->
+					<div class="col-lg-3 panel panel-default">
+						<div class="col-lg-12 panel-heading">Location</div>
+						<div class="panel-body">
+							<div class="col-lg-12 court" id="court">
+								<div id="locationOpponent"class="col-lg-12 myButton">Opponent</div>
+								<div class="col-lg-12 myButton">Attack Line</div>
+								<div class="col-lg-12 myButton">Attack Line</div>
+								<div id="locationOpponent"class="col-lg-12 myButton">Home</div>
+							</div>	
+						</div>				
+					</div>
+
 					<!-- Scoreboard -->
-					<div class="col-lg-3">
-						<div class="row btn-info" style="background-color: #333">
-							<div class="col-lg-12"><label class="tileHeader">Score</label></div>
-
-							<div class="col-lg-6 text-center" style="background-color: #0000FF">
-								<div class="col-lg-3 score" onclick="changeHomeScore(-1);">-</div>
-								<div class="col-lg-6 score" id="homeScore">0</div>
-								<div class="col-lg-3 score" onclick="changeHomeScore(+1);">+</div>
-								<div class="col-lg-12" id="scoreBoardHomeName">Home</div>
-							</div>
-							
-
-							<div class="col-lg-6 text-center" style="background-color: #FF0000">
-								<div class="col-lg-3 score" onclick="changeOpponentScore(-1);">-</div>
-								<div class="col-lg-6 score" id="opponentScore">0</div>
-								<div class="col-lg-3 score" onclick="changeOpponentScore(+1);">+</div>
-								<div class="col-lg-12" id="scoreBoardOppName">Opponent</div>
-							</div>
-							
-							
+					<div class="col-lg-3 panel panel-default">
+						<div class="col-lg-12 panel-heading">Score</div>
+						<div class="panel-body">
+							<div class="col-lg-3 score" onclick="changeHomeScore(-1);">-</div>
+							<div class="col-lg-6 score" id="homeScore">0</div>
+							<div class="col-lg-3 score" onclick="changeHomeScore(+1);">+</div>
+							<div class="col-lg-12 panel-title" id="scoreBoardHomeName">Home</div>
 						</div>
 
+						<div class="panel-body">
+							<div class="col-lg-3 score" onclick="changeOpponentScore(-1);">-</div>
+							<div class="col-lg-6 score" id="opponentScore">0</div>
+							<div class="col-lg-3 score" onclick="changeOpponentScore(+1);">+</div>
+							<div class="col-lg-12 panel-title" id="scoreBoardOppName">Opponent</div>
+						</div>
+						
 						<!-- Activity -->
-						<div class="row btn-info" style="background-color: #333">
-							<div class="col-lg-12">
-								<label class="tileHeader" style="padding-top: 5 px; padding-bottom: 5px;">Activity</label>
-							</div>
-
-
-							<!-- Activity Entry -->
+						<div class="panel-body">
+							<div class="col-lg-12 panel-title">Activity</div>
 							<div class="col-lg-12 input-group">
 								<span class="input-group-addon" id="basic-addon3">@</span>
 								<input size="35" type="text" id="pointTracker" class="form-control" placeholder="Point Details" aria-describedby="basic-addon4" name="pointTracker" id="pointTracker">
 							</div>
-							<div class="col-lg-6" id="enterStream" style="font-size: 36px;">enter</div>
-							<div class="col-lg-6" id="undoLast" style="font-size: 36px;">undo</div>
+							<div class="col-lg-6" id="enterStream">enter</div>
+							<div class="col-lg-6" id="undoLast">undo</div>
+						</div>
 
 							<!-- Activity Stream -->
+						<div class="panel-body">
 							<div class="col-lg-12" id="activityStream" class="activityStream"></div>
 						</div>
+
 					</div>
+					
 				</div>
 			
 				<!-- Footer -->
 				<div class="row">
-					<div class="col-lg-12">footer</div>
+					<div class="col-lg-12 myFooter">footer</div>
 				</div>
+
+				<script type="text/javascript" src="../dist/js/volleyDash.js"></script>
 			</form>
-
-		</div>
-
-<!-- JavaScript and JQUERY to run page -->
-		<script type="text/javascript">
-
-				//Stores All Match Data
-				var match;
-				var pointDetails;
-				var setDetails;
-				var homeScore = 0;
-				var opponentScore = 0;
-
-				//Gets Query String Params (we need id to lookup doc in mongo)
-				var queries = {};
-				$.each(document.location.search.substr(1).split('&'), function(c,q){
-   					var i = q.split('=');
-    				queries[i[0].toString()] = i[1].toString();
-				});
-				
-				//Get the match from mongo
-				$.get( "/matches/getById", { id: queries['id'] } )
-  					.done(function( data ) {
-     				match = data[0];
- 
-     				$('#headerTitle').append(match.home + " vs " + match.opponent) ;
-
-     				$('#scoreBoardHomeName').text(match.home);
-     				$('#scoreBoardOppName').text(match.opponent);
-     			
-     				setSetDetails(match);
-     				setPointDetails(match);
-
- 				}, "json");
-
-
-  				function setPointDetails(match) {
-  					var len = setDetails['pointDetails'].length;
-  					if(len == 0){
-					    pointDetails = {
-							'homeScore' : 0,
-							'opponentScore' : 0,
-							'playerNumber' : { 'label' : '', 'val' : ''},
-							'skill' : { 'label' : '', 'val' : ''},
-							'result' : { 'label' : '', 'val' : ''},
-							'location' : {'side' : '', 'xval' : '', 'yval' : '' },
-							'homeTeam' : {'label' : '', 'val' : ''},
-							'opponentTeam' : {'label' : '', 'val' : ''},
-							'setNumber' : {'label' : '', 'val' : ''}
-					    }
-					} else{
-						pointDetails = setDetails['pointDetails'].pop();
-						setDetails['pointDetails'].push(CreatePointDetailsSnapShot());
-						
-						for (var i = 0; i < len; i++) {
-						    addPointToActivityStream(setDetails['pointDetails'][i])
-						}
-
-						resetPointDetails();
-					}
-				}
-
-  				function setSetDetails(match) {
-  					if(match.sets.length == 0){					    
-						setDetails = {
-							'pointDetails' : []
-						}
-						match.sets.push(setDetails);
-					} else {
-						setDetails = match.sets[match.sets.length - 1];
-					}
-				}
-
-
-				function setInfo(a,b,c) {
-					
-					pointDetails['homeTeam']['val'] = a.value;
-					pointDetails['opponentTeam']['val'] = b.value;
-					pointDetails['setNumber']['val'] = c.value;
-
-					$("div.headerTitle").replaceWith(
-			            "<div col-lg-3 btn-lg>" + a.value + " versus " + b.value + ", Set " + c.value + "</div>"
-			        );
-					//alert(pointDetails[myInfo.name]['val']);
-				}
-
-				function resetPointDetails(){
-					pointDetails = {
-						'playerNumber' : { 'label' : '', 'val' : ''},
-						'skill' : { 'label' : '', 'val' : ''},
-						'result' : { 'label' : '', 'val' : ''},
-						'location' : {'side' : '', 'xval' : '', 'yval' : '' },
-						'homeTeam' : {'label' : '', 'val' : ''},
-						'opponentTeam' : {'label' : '', 'val' : ''},
-						'setNumber' : {'label' : '', 'val' : ''}
-					}
-				}
-
-				function CreatePointDetailsSnapShot(){
-					
-					//this works					
-					var num = jQuery.extend({},pointDetails['playerNumber']);
-					var skill = jQuery.extend({},pointDetails['skill']);
-					var result = jQuery.extend({},pointDetails['result']);
-					var location = jQuery.extend({},pointDetails['location']);
-
-					var snap = { 
-						'homeScore' : homeScore,
-						'opponentScore' : opponentScore,
-						'playerNumber' : num,
-						'skill' : skill,
-						'result' : result,
-						'location' : location
-					};
-
-					//does not work
-					//var copy = jQuery.extend({},true,pointDetails);
-					//var snap = copy;
-					
-
-					return snap;
-				}
-
-				var lookupSkillLabel = {
-					'Serve' : { 
-						 '* Terminate *' : 'Ace',
-						 '3 | +' : '+',
-						 '2 | /' : '/', 
-						 '1 | -' : '-', 
-						 '0 | e' : 'err', 
-						 '' : ''
-					},
-
-					'Pass' : {
-						 '* Terminate *': 'N/A',
-						 '3 | +' : '3',
-						 '2 | /' : '2', 
-						 '1 | -' : '1', 
-						 '0 | e' : '0', 
-						 '' : ''
-					},
-					
-					'Set' : {
-						 '* Terminate *' : 'N/A',
-						 '3 | +' : '+',
-						 '2 | /' : '/', 
-						 '1 | -' : '-', 
-						 '0 | e' : 'err', 
-						 '' : ''
-					},
-
-
-					'Attack' :  {
-						  '* Terminate *': 'Kill',
-						 '3 | +' : '+',
-						 '2 | /' : '/', 
-						 '1 | -' : '-', 
-						 '0 | e' : 'err', 
-						 '' : ''
-					},
-
-					'Block' : {
-						 '* Terminate *': 'Block',
-						 '3 | +' : 'N/A',
-						 '2 | /' : 'N/A',
-						 '1 | -' : 'N/A',
-						 '0 | e' : 'Error',
-						 '' : ''
-					},
-
-					'Block Assist' : {
-						 '* Terminate *': 'Block Assist',
-						 '3 | +' : 'N/A',
-						 '2 | /' : 'N/A',
-						 '1 | -' : 'N/A',
-						 '0 | e' : 'err',
-						 '' : ''
-					},
-
-					'Defense' : { 
-						 '* Terminate *': 'N/A',
-						 '3 | +' : '+',
-						 '2 | /' : '/', 
-						 '1 | -' : '-', 
-						 '0 | e' : 'err', 
-						 '' : ''
-					}
-				};
-
-							
-				function changeHomeScore(myVal) {
-					homeScore = homeScore + myVal;
-					$('#homeScore').text(homeScore); 
-
-					pointDetails['homeScore'] = homeScore;
-
-				}
-
-
-				function changeOpponentScore(myVal) {
-					opponentScore = opponentScore + myVal;
-					$('#opponentScore').text(opponentScore); 
-					pointDetails['opponentScore'] = opponentScore;
-					
-				}
-
-		        function OnChangePlayer(playerNumber) { 				
-		        	pointDetails['playerNumber']['val'] = playerNumber.textContent;
-		        	pointTracker.value = pointDetails['playerNumber']['label'] + pointDetails['playerNumber']['val'];
-		        }
-
-		        function OnChangeSkill(skill) {
-					pointDetails['skill']['val'] = skill.textContent;
-		        	pointTracker.value = pointDetails['playerNumber']['label'] + pointDetails['playerNumber']['val'] + " " + pointDetails['skill']['val'] + " " + lookupSkillLabel[pointDetails['skill']['val']][pointDetails['result']['val']];
-		        }
-
-		        function OnChangeResult(result) {
-					pointDetails['result']['val'] = result.textContent;
-		        	pointTracker.value = pointDetails['playerNumber']['label'] + pointDetails['playerNumber']['val'] + " " + pointDetails['skill']['val'] + " " + lookupSkillLabel[pointDetails['skill']['val']][pointDetails['result']['val']];
-		        }
-
-		        function translateCourtLocation(x,y,myImage) {
-		        	padding = 0;
-
-		        	xLocationInMeters = ((x - padding) / myImage.width() ) * 30; 
-		        	yLocationInMeters = ((y - padding) / myImage.height() ) * 60; 
-
-		        	if (yLocationInMeters < 30){
-		        		LocationType = 'Opponent';
-		        		yLocationInMeters = 30- yLocationInMeters;
-		        		xLocationInMeters = 30- xLocationInMeters;
-		        	}
-		        	else {
-		        		yLocationInMeters = yLocationInMeters - 30;
-		        		LocationType = "Home";
-		        	}
-
-		        	pointDetails['location']['side'] = LocationType;
-		        	pointDetails['location']['xval'] = xLocationInMeters.toFixed(2);
-		        	pointDetails['location']['yval'] = yLocationInMeters.toFixed(2);
-
-
-		        	pointTracker.value = pointDetails['playerNumber']['label'] + pointDetails['playerNumber']['val'] + " " + pointDetails['skill']['val'] + " " + lookupSkillLabel[pointDetails['skill']['val']][pointDetails['result']['val']] + " " + pointDetails['location']['side'] + "(" + pointDetails['location']['xval'] + ', ' + pointDetails['location']['yval'] + ")";
-		        }
-
-		        function removeLastPointFromActivityStream(){
-		        	$("#activityStream").children("div:first").remove();
-		        }
-
-		        function addPointToActivityStream(p){
-		        		$("#activityStream").prepend(
-							$('<div class="color: #fff">' +
-								'(' + 
-								 homeScore + '-' + opponentScore + ') ' + 
-
-								p['playerNumber']['val'] + ' ' +
-								p['skill']['val'] + ' ' +
-
-								lookupSkillLabel[p['skill']['val']][p['result']['val']]  +
-								' (' +
-
-								p['location']['side'] + ' ' + p['location']['xval'] + ', ' + p['location']['yval'] +								' )' 
-							 +' </div>')
-							);
-		        }
-
 			
-				$(function() {
-					$("#court").click(function(e) {
-
-					  var offset = $(this).offset();
-					  var relativeX = (e.pageX - offset.left);
-					  var relativeY = (e.pageY - offset.top);
-
-		        	$("#court").append(
-			            $('<div></div>')
-			                .css('position', 'absolute')
-			                .css('top', relativeY + 'px')
-			                .css('left', relativeX + 'px')
-			                .css('width', 8)
-			                .css('height', 8)
-			                .css('background-color', '#fff'));
-
-					  translateCourtLocation(relativeX,relativeY, $(this) );
-					  
-					});
-				});
-
-
-				$(function() {
-					$("#enterStream").click(function(e) {
-
-						//$.extend({}, pointDetails
-						setDetails['pointDetails'].push(CreatePointDetailsSnapShot()); 	
-
-						//Push to DB
-						$.post("/matches/updateById",
-							  {
-							    id : match._id,
-							    match : JSON.stringify(match)
-							  },
-							  function(data,status){
-							    console.log("insert point status: " + status);
-						});
-
-						addPointToActivityStream(pointDetails);
-
-						resetPointDetails();
-						pointTracker.value = '';
-
-					});
-				});
-
-				$(function() {
-					$("#undoLast").click(function(e) {
-						setDetails['pointDetails'].pop(); 	
-
-						//Push to DB
-						$.post("/matches/updateById",
-							  {
-							    id : match._id,
-							    match : JSON.stringify(match)
-							  },
-							  function(data,status){
-							    console.log("removed point status: " + status);
-						});
-
-						removeLastPointFromActivityStream();
-
-						resetPointDetails();
-						pointTracker.value = '';
-
-					});
-				});
-		</script>
+		</div>
 	</body>
 </html>

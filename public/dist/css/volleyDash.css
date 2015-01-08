@@ -1,82 +1,69 @@
-
-
 body {
     font-family:sans-serif;
-    background-color: "#000";
+    background-color: #000;
 }
 
-div label input {
-   margin-right:0px;
-
-}
-
-
-
-#ck-button {
-    margin:5px;
-    background-color:#EFEFEF;
-    border-radius:50px;
-    border:5px solid #fff;
-    overflow:auto;
-    float:left;
-    height: 65px;
-    width: 65px;
-}
-
-#ck-button:hover {
-    background: #265a88;
-}   
-
-#ck-button label {
-    float:left;
-    width:4.0em;
+.headerTitle {
+    display: block;
+    font-family: lft-etica, sans-serif;
     font-size: 30px;
-    color: #999;
+    font-style: italic;
+    font-weight: 700;
 }
 
-#ck-button  #playerNumberButton label {
-    color: ##265a88;
+.myFooter {
+    display: block;
+    font-family: lft-etica, sans-serif;
+    font-size: 25px;
+    font-style: italic;
+    color: #669900;
+    font-weight: 500;
+    text-align: center;
 }
 
-#ck-button label span {
-    text-align:center;
-    padding:3px 0px;
-    display:block;
-}
-
-#ck-button label input {
-    position:absolute;
-    top:-20px;
-    visibility: hidden;
-}
-
-#ck-button input:checked + span {
-    background-color:#911;
-    color:#fff;
-}
-
-.tileHeader {
-    color: #fff;
-}
-
-.col-centered{
-    float: none;
-    margin: 0 auto;
-}
-
-.court {
-    width: 80%;
-    padding: 20px;
+.panel-body {
     border-style: solid;
+    border-width: 1px;
+    border-color: #000;
+}
+
+.col-lg-2.panel.panel-default{
+    border-style: none;
+    border-width: 0px;
     border-color: #fff;
+    //background-color: #598DB2; 
 
 }
 
-.myMarker {
-    position: relative;
-    visibility: visible;
+.panel-heading {
+    font-size:20px;
+    font-family: lft-etica, sans-serif;
+    font-weight: 800;
+    width: 100%;
 }
 
-.playerNumberButton {
-    color: #000;
+.myButton {
+    font-family: proxima-nova-soft, sans-serif;
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    text-align: center;
 }
+
+.myButton:hover {
+    color: #770033;
+}
+
+.player {background-color: #fff;}
+.player:hover {background-color: #598DB2; color: #fff;}
+
+.skill {background-color: #fff;}
+.skill:hover {background-color: #770033; color: #fff;}
+
+.result {background-color: #fff;}
+.result:hover {background-color: #770033; color: #fff;}
+
+.location {background-color: #fff;}
