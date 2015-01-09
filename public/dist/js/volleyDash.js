@@ -2,7 +2,7 @@
 
 				//Stores All Match Data
 				var match;
-				var pointDetails;
+				var pointDetail;
 				var setDetails;
 				var homeScore = 0;
 				var opponentScore = 0;
@@ -27,7 +27,7 @@
      				$('#scoreBoardOppName').text(match.opponent);
       			
      				setSetDetails(match);
-     				setPointDetails(match);
+     				setPointDetail(match);
 
  				}, "json");
 
@@ -53,9 +53,6 @@
 	  			var bench = [];
 	  			setStartingLineup();
 
-	  			
-
-
 	  			//Pulls the 6 starters from the whole team
 	  			function setStartingLineup(){
 					for (i = 0; i < team.length; i++) { 
@@ -67,10 +64,7 @@
     					}
     				}
     				updateLineupScreen();
-    				
 	  			}
-
-
 
 	  			//Add Lineup to the Screen
 	  			function updateLineupScreen() {
@@ -79,7 +73,6 @@
 	    				addPlayerToCourt(player.Player,player.Number,i,player.Position);
 					}	
 				}
-
 
 				function rotate(){
 					var p = lineup.pop();
@@ -99,7 +92,6 @@
 				            		
 				            	'</div>')
 				     );
-
   				}
 
   				function addPlayerToBench(playerName,playerNumber,position) {
@@ -113,29 +105,28 @@
 				     );
   				}
 
-  				function setPointDetails(match) {
+  				function setPointDetail(match) {
   					var len = setDetails['pointDetails'].length;
   					if(len == 0){
-					    pointDetails = {
+					    pointDetail = {
 							'homeScore' : 0,
 							'opponentScore' : 0,
-							'playerNumber' : { 'label' : '', 'val' : ''},
-							'skill' : { 'label' : '', 'val' : ''},
-							'result' : { 'label' : '', 'val' : ''},
+							'playerNumber' : '',
+							'skill' : '',
+							'result' : '',
 							'location' : {'side' : '', 'xval' : '', 'yval' : '' },
-							'homeTeam' : {'label' : '', 'val' : ''},
-							'opponentTeam' : {'label' : '', 'val' : ''},
-							'setNumber' : {'label' : '', 'val' : ''}
+							'homeTeam' : '',
+							'opponentTeam' : '',
+							'setNumber' : ''
 					    }
 					} else{
-						pointDetails = setDetails['pointDetails'].pop();
-						setDetails['pointDetails'].push(CreatePointDetailsSnapShot());
+						pointDetail = setDetails['pointDetails'].pop();
+						setDetails['pointDetails'].push(CreatePointDetailSnapShot());
 						
 						for (var i = 0; i < len; i++) {
 						    addPointToActivityStream(setDetails['pointDetails'][i])
 						}
-
-						resetPointDetails();
+						resetPointDetail();
 					}
 				}
 
@@ -152,36 +143,34 @@
 
 
 				function setInfo(a,b,c) {
-					
-					pointDetails['homeTeam']['val'] = a.value;
-					pointDetails['opponentTeam']['val'] = b.value;
-					pointDetails['setNumber']['val'] = c.value;
+					pointDetail['homeTeam'] = a.value;
+					pointDetail['opponentTeam'] = b.value;
+					pointDetail['setNumber'] = c.value;
 
 					$("div.headerTitle").replaceWith(
 			            "<div col-lg-3 btn-lg>" + a.value + " versus " + b.value + ", Set " + c.value + "</div>"
 			        );
-					//alert(pointDetails[myInfo.name]['val']);
+
 				}
 
-				function resetPointDetails(){
-					pointDetails = {
-						'playerNumber' : { 'label' : '', 'val' : ''},
-						'skill' : { 'label' : '', 'val' : ''},
-						'result' : { 'label' : '', 'val' : ''},
+				function resetPointDetail(){
+					pointDetail = {
+						'playerNumber' : '',
+						'skill' : '',
+						'result' : '',
 						'location' : {'side' : '', 'xval' : '', 'yval' : '' },
-						'homeTeam' : {'label' : '', 'val' : ''},
-						'opponentTeam' : {'label' : '', 'val' : ''},
-						'setNumber' : {'label' : '', 'val' : ''}
+						'homeTeam' : '',
+						'opponentTeam' : '',
+						'setNumber' : ''
 					}
 				}
 
-				function CreatePointDetailsSnapShot(){
-					
+				function CreatePointDetailSnapShot(){
 					//this works					
-					var num = jQuery.extend({},pointDetails['playerNumber']);
-					var skill = jQuery.extend({},pointDetails['skill']);
-					var result = jQuery.extend({},pointDetails['result']);
-					var location = jQuery.extend({},pointDetails['location']);
+					var num = pointDetail['playerNumber'];
+					var skill = pointDetail['skill'];
+					var result = pointDetail['result'];
+					var location = jQuery.extend({},pointDetail['location']);
 
 					var snap = { 
 						'homeScore' : homeScore,
@@ -192,15 +181,8 @@
 						'location' : location
 					};
 
-					//does not work
-					//var copy = jQuery.extend({},true,pointDetails);
-					//var snap = copy;
-					
-
 					return snap;
 				}
-
-
 
 				var lookupSkillLabel = {
 					'Serve' : { 
@@ -229,7 +211,6 @@
 						 '0 | e' : 'err', 
 						 '' : ''
 					},
-
 
 					'Attack' :  {
 						  '* Terminate *': 'Kill',
@@ -271,33 +252,31 @@
 							
 				function changeHomeScore(myVal) {
 					homeScore = homeScore + myVal;
-					$('#homeScore').text(homeScore); 
-
-					pointDetails['homeScore'] = homeScore;
-
+					$('#homeScore').text(homeScore);
+					pointDetail['homeScore'] = homeScore;
 				}
 
 
 				function changeOpponentScore(myVal) {
 					opponentScore = opponentScore + myVal;
 					$('#opponentScore').text(opponentScore); 
-					pointDetails['opponentScore'] = opponentScore;
+					pointDetail['opponentScore'] = opponentScore;
 					
 				}
 
 		        function OnChangePlayer(playerNumber) { 				
-		        	pointDetails['playerNumber']['val'] = playerNumber.textContent;
-		        	pointTracker.value = pointDetails['playerNumber']['label'] + pointDetails['playerNumber']['val'];
+		        	pointDetail['playerNumber'] = playerNumber.textContent;
+		        	pointTracker.value = 'Player ' + pointDetail['playerNumber'];
 		        }
 
 		        function OnChangeSkill(skill) {
-					pointDetails['skill']['val'] = skill.textContent;
-		        	pointTracker.value = pointDetails['playerNumber']['label'] + pointDetails['playerNumber']['val'] + " " + pointDetails['skill']['val'] + " " + lookupSkillLabel[pointDetails['skill']['val']][pointDetails['result']['val']];
+					pointDetail['skill'] = skill.textContent;
+		        	pointTracker.value = 'Player ' + pointDetail['playerNumber'] + " " + pointDetail['skill'] + " " + lookupSkillLabel[pointDetail['skill']][pointDetail['result']];
 		        }
 
 		        function OnChangeResult(result) {
-					pointDetails['result']['val'] = result.textContent;
-		        	pointTracker.value = pointDetails['playerNumber']['label'] + pointDetails['playerNumber']['val'] + " " + pointDetails['skill']['val'] + " " + lookupSkillLabel[pointDetails['skill']['val']][pointDetails['result']['val']];
+					pointDetail['result'] = result.textContent;
+		        	pointTracker.value = 'Player ' + pointDetail['playerNumber'] + " " + pointDetail['skill'] + " " + lookupSkillLabel[pointDetail['skill']][pointDetail['result']];
 		        }
 
 		        function translateCourtLocation(x,y,myImage) {
@@ -316,12 +295,12 @@
 		        		LocationType = "Home";
 		        	}
 
-		        	pointDetails['location']['side'] = LocationType;
-		        	pointDetails['location']['xval'] = xLocationInMeters.toFixed(2);
-		        	pointDetails['location']['yval'] = yLocationInMeters.toFixed(2);
+		        	pointDetail['location']['side'] = LocationType;
+		        	pointDetail['location']['xval'] = xLocationInMeters.toFixed(2);
+		        	pointDetail['location']['yval'] = yLocationInMeters.toFixed(2);
 
 
-		        	pointTracker.value = pointDetails['playerNumber']['label'] + pointDetails['playerNumber']['val'] + " " + pointDetails['skill']['val'] + " " + lookupSkillLabel[pointDetails['skill']['val']][pointDetails['result']['val']] + " " + pointDetails['location']['side'] + "(" + pointDetails['location']['xval'] + ', ' + pointDetails['location']['yval'] + ")";
+		        	pointTracker.value = 'Player ' + pointDetail['playerNumber'] + " " + pointDetail['skill'] + " " + lookupSkillLabel[pointDetail['skill']][pointDetail['result']] + " " + pointDetail['location']['side'] + "(" + pointDetail['location']['xval'] + ', ' + pointDetail['location']['yval'] + ")";
 		        }
 
 		        function removeLastPointFromActivityStream(){
@@ -334,10 +313,10 @@
 								'(' + 
 								 homeScore + '-' + opponentScore + ') ' + 
 
-								p['playerNumber']['val'] + ' ' +
-								p['skill']['val'] + ' ' +
+								p['playerNumber'] + ' ' +
+								p['skill'] + ' ' +
 
-								lookupSkillLabel[p['skill']['val']][p['result']['val']]  +
+								lookupSkillLabel[p['skill']][p['result']]  +
 								' (' +
 
 								p['location']['side'] + ' ' + p['location']['xval'] + ', ' + p['location']['yval'] +								' )' 
@@ -371,8 +350,7 @@
 				$(function() {
 					$("#enterStream").click(function(e) {
 
-						//$.extend({}, pointDetails
-						setDetails['pointDetails'].push(CreatePointDetailsSnapShot()); 	
+						setDetails['pointDetails'].push(CreatePointDetailSnapShot());
 
 						//Push to DB
 						$.post("/matches/updateById",
@@ -384,9 +362,8 @@
 							    console.log("insert point status: " + status);
 						});
 
-						addPointToActivityStream(pointDetails);
-
-						resetPointDetails();
+						addPointToActivityStream(pointDetail);
+						resetPointDetail();
 						pointTracker.value = '';
 
 					});
@@ -408,7 +385,7 @@
 
 						removeLastPointFromActivityStream();
 
-						resetPointDetails();
+						resetPointDetail();
 						pointTracker.value = '';
 
 					});
