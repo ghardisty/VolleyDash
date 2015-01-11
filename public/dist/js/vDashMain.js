@@ -46,5 +46,62 @@ app.controller('TeamController', function($scope) {
 
 });
 
+app.controller('SkillController', function($scope) {
+  $scope.allSkills = [
+    {"skill" : "Serve", "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E", "Termination" : "Ace"},
+    {"skill" : "Pass", "Good": "3", "Neutral": "2", "Poor": "1", "Error" : "0"},
+    {"skill" : "Set", "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E"},
+    {"skill" : "Attack",  "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E", "Termination" : "Kill"},
+    {"skill" : "Block",  "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E", "Termination" : "Block"},
+    {"skill" : "Block Assist",  "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E", "Termination" : "Block Assist"},
+    {"skill" : "Defense", "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E"}];
+});
 
+
+
+function translateCourtLocation(x,y,myImage) {
+  padding = 0;
+
+  xLocationInMeters = ((x - padding) / myImage.width() ) * 30; 
+  yLocationInMeters = ((y - padding) / myImage.height() ) * 60; 
+
+  if (yLocationInMeters < 30){
+    LocationType = 'Opponent';
+    yLocationInMeters = 30- yLocationInMeters;
+    xLocationInMeters = 30- xLocationInMeters;
+  }
+  else {
+    yLocationInMeters = yLocationInMeters - 30;
+    LocationType = "Home";
+  }
+
+  pointDetail['location']['side'] = LocationType;
+  pointDetail['location']['xval'] = xLocationInMeters.toFixed(2);
+  pointDetail['location']['yval'] = yLocationInMeters.toFixed(2);
+
+
+  //pointTracker.value = 'Player ' + pointDetail['playerNumber'] + " " + pointDetail['skill'] + " " + lookupSkillLabel[pointDetail['skill']][pointDetail['result']] + " " + pointDetail['location']['side'] + "(" + pointDetail['location']['xval'] + ', ' + pointDetail['location']['yval'] + ")";
+}
+
+
+$(function() {
+  $("#court").click(function(e) {
+
+    var offset = $(this).offset();
+    var relativeX = (e.pageX - offset.left);
+    var relativeY = (e.pageY - offset.top);
+
+  $("#court").append(
+        $('<div></div>')
+            .css('position', 'absolute')
+            .css('top', relativeY + 'px')
+            .css('left', relativeX + 'px')
+            .css('width', 8)
+            .css('height', 8)
+            .css('background-color', '#fff'));
+
+    translateCourtLocation(relativeX,relativeY, $(this) );
+    
+  });
+});
 

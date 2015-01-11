@@ -1,0 +1,105 @@
+body {
+	color: #fff;
+}
+
+h2 { 
+	color: rgba(0, 210, 241, 0.95);
+	font-family: "Trebuchet MS";
+	text-transform: uppercase;
+	font-weight: bolder;
+}
+
+h3 { 
+	color: #ffc600;
+	font-family: "Trebuchet MS";
+	text-transform: uppercase;
+	font-weight: bolder;
+}
+
+button {
+	background-color: #00d2f1;
+	font-size: 22px;
+	border-style: none;
+	height: 50px;
+	width: 50px;
+}
+
+.clickable { cursor: pointer;}
+
+.clickable .glyphicon
+{
+    background: rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px
+}
+
+a.clickable { color: inherit; }
+a.clickable:hover { text-decoration:none; }
+
+.panel-heading span
+{
+    margin-top: -2px;
+    font-size: 10px;
+    margin-right: -2px;
+}
+
+.panel {
+	background-color: #333; 
+	color: #fff;
+	border-style: solid;
+	border-color: #ffc600;
+	border-width: 1px;
+	border-radius: 10px;
+}
+
+
+.yellowLine {
+	background-color: #ffc600;
+	height: 5px;
+	width:100%;
+}
+
+.mainContent {
+	background-color: #00d2f1;
+	
+}
+
+
+.skill {color: #fff; font-size: 17px; height:50px;}
+	.skill:hover {background-color:  rgba(134, 38, 155, 0.95);}
+	.skill:active {background-color:  rgba(134, 38, 155, 0.95);}
+	.skill:link {background-color:   rgba(134, 38, 155, 0.95);}
+
+	.good {background-color: rgba(0, 183, 150, 0.95);}
+	.neutral {background-color:  rgba(0, 183, 150, 0.75);}
+	.poor {background-color: rgba(0, 183, 150, 0.55);}
+	.error {background-color: rgba(0, 183, 150, 0.35);}
+	.termination {background-color:  rgba(204, 0, 99, 0.95);}
+
+
+.player {
+	background-color: #666;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #ffc600;
+}
+	.player:hover {background-color: #ffc600;}
+	.player:active {background-color: #00d2f1;}
+	.player:link {background-color:  #ffc600;}
+
+.score {
+	font-size: 32px;
+}
+
+.myButton {
+	border-style: solid;
+	border-color: #000;
+	height: 200px;
+	width:  300px;
+}
+
+
+.myButton.attack {
+	height: 100px;
+}

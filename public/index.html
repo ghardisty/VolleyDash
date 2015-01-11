@@ -3,8 +3,8 @@
 	<head>
 		<title>Volley-Dash</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<link href="../dist/css/volleyDash.css" rel="stylesheet">
 		<link href="../dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../dist/css/vDash.css" rel="stylesheet">
 	
     	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
     	<script type="text/javascript" src="dist/js/vDashMain.js"></script>
@@ -14,96 +14,133 @@
 		<div class="container-fluid">	
 			<!-- Header -->
 			<div class="row">
-				<div class="col-lg-12">
-					<div class="col-lg-12 headerTitle text-center" id="headerTitle"></div>
-					
-				</div>
+				<div class="col-sm-12 text-center"><h2>{{ teamName }} vs. {{ opponentName }}</h2></div>
+				<div class="col-sm-12 text-center">Set {{ set }} </div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 text-center yellowLine"> </div>
 			</div>
 
-			<div class="row" >
-				<!-- Player Number Entry -->
-				<div class="col-sm-6 panel panel-default" ng-controller="TeamController">
-					<div class="col-sm-12 panel-heading" >Team</div>
-					<div class="col-sm-6 panel-heading" ng-click="rotate(1)">R</div>	
-					<div class="col-sm-6 panel-heading" ng-click="rotate(5)">Rev</div>						
-					<!--<div class="col-sm-4 panel-body" ng-repeat="member in teamMembers | filter:isOnCourt | orderBy:'courtPosition' ">-->
-					<div class="col-sm-4 panel-body" ng-repeat="member in teamMembers | filter:isOnCourt | orderBy: getVisualOrder">
-						<div>{{ member.playerName }}</div> 	
-						<div>#{{ member.playerNumber }}</div>
-						<div>{{ member.playerPosition }}</div>
-						<!-- <div>{{ member.courtPosition }}</div> -->
+			<div class="row mainContent">
+				<div class="col-sm-2">
+				<!-- Set Match Information -->
+					<div class="col-sm-12 panel">
+						<div class="panel-heading">
+							<h3 class="panel-title">Set Match Info</h3>
+							<span class="pull-right clickable"><i class="glyphicon glyphicon-minus"></i></span>
+						</div>
+						<div class="panel-body">
+							<input type="text" ng-model="teamName"  placeholder="Enter Home Team Here" ng-init="teamName='Coast 14-1 Mizuno Luis'">
+							<input type="text" ng-model="opponentName" placeholder="Enter Opponent Here" ng-init="opponentName='Opponent'">
+							<input type="text" ng-model="set" placeholder="Enter Set Number Here" ng-init="set=1">
+						</div>
 					</div>
-					
+				<!-- Scoreboard -->
+					<div class="col-sm-12 panel">
+						<div class="panel-heading">
+							<h3 class="panel-title">Score</h3>
+						</div>
+						<div class="panel-body text-center">
+							<div class="col-lg-3 score"><button ng-click="homeScore = homeScore - 1" ng-init="homeScore=0">-</button></div>
+							<div class="col-lg-6 score">{{ homeScore }}</div>
+							<div class="col-lg-3 score"><button ng-click="homeScore = homeScore + 1" ng-init="homeScore=0">+</button></div>
+							<div class="col-lg-12 panel-title">{{ teamName }}</div>
+						</div>
 
-					<div class="col-sm-12 panel-heading">Bench </div>
-					<div class="col-sm-4 panel-body" ng-repeat="member in teamMembers | filter:isOnBench">
-						<div>{{ member.playerName }}</div> 	
-						<div>{{ member.playerNumber }}</div>
-						<div>{{ member.playerPosition }}</div>
-						<div>{{ results.length }}
+						<div class="panel-body text-center">
+							<div class="col-lg-3 score"><button ng-click="opponentScore = opponentScore - 1" ng-init="opponentScore=0">-</button></div>
+							<div class="col-lg-6 score">{{ opponentScore }}</div>
+							<div class="col-lg-3 score"><button ng-click="opponentScore = opponentScore + 1" ng-init="opponentScore=0">+</button></div>
+							<div class="col-lg-12 panel-title">{{ opponentName }}</div>
+						</div>
+					</div>
+
+				<!-- Activity -->
+					<div class="col-sm-12 panel">
+						<div class="panel-header">
+							<h3 class="panel-title">Activity</h3>
+						</div>
+						<div class="panel-body input-group">
+							<span class="input-group-addon" id="basic-addon3">@</span>
+							<input size="35" type="text" id="pointTracker" class="form-control" placeholder="Point Details" aria-describedby="basic-addon4" name="pointTracker" id="pointTracker">
+						</div>
+						<div id="enterStream">enter</div>
+						<div id="undoLast">undo</div>
+					</div>
+
+				<!-- Activity Stream -->
+					<div class="col-sm-12 panel">
+						<div class="panel-header">
+							<h3 class="panel-title">Activity Stream</h3>
+						</div>
+						<div class="panel-body"></div>
 					</div>
 				</div>
-			
-				<!-- Skill and Result Entry -->
-				<div class="col-lg-4 panel panel-default">
-					<div class="col-sm-12 panel-heading">Skill</div>
-					<div class="col-sm-12 panel-body">
-						<div>{{ skill.name }}</div>
-						<div>{{ skill.resultLabel }}</div>
-						<div>{{ skill.resultMetric }}</div>
+				
+
+				<!-- Player Number Entry -->
+				<div class="col-sm-3">
+					<div class="col-sm-12" ng-controller="TeamController">
+						<div class="panel">
+							<div class="panel-heading">
+								<h3 class="panel-title">Player</h3>
+							</div>
+											
+							<div class="col-sm-4 panel-body player" ng-repeat="member in teamMembers | filter:isOnCourt | orderBy: getVisualOrder">
+								<div>{{ member.playerName }}</div> 	
+								<div>#{{ member.playerNumber }}</div>
+								<div>{{ member.playerPosition }}</div>
+							</div>
+
+							<div class="panel-body" ng-click="rotate(1)">R</div>	
+							<div class="panel-body" ng-click="rotate(5)">Rev</div>
+						</div>
+
+						<div class="panel">
+							<div class="panel-heading">
+								<h3 class="panel-title">Bench</h3>
+							</div>
+
+							<div class="col-sm-3 panel-body player" ng-repeat="member in teamMembers | filter:isOnBench">
+								<div>{{ member.playerName }} (#{{ member.playerNumber }})</div> 
+								<div>Sub</div>
+							</div>
+						</div>
 					</div>
-					<div class="col-sm-12 panel-body">
-						<div>{{ skill.resultLabel }}</div>
-						<div>{{ skill.resultMetric }}</div>
+				</div>
+						
+				<!-- Skill and Result Entry -->
+				<div class="col-sm-4" ng-controller="SkillController">
+					<div class="panel">
+						<div class="panel-heading">
+							<h3 class="panel-title">Skill</h3>
+						</div>
+						<div class="panel-body" ng-repeat="mySkill in allSkills">
+							<div class="col-sm-2 text-left skill">{{ mySkill.skill }}</div>
+							<div class="col-sm-2 text-center skill good">{{ mySkill.Good }}</div>
+							<div class="col-sm-2 text-center skill neutral">{{ mySkill.Neutral }}</div>
+							<div class="col-sm-2 text-center skill poor">{{ mySkill.Poor }}</div>
+							<div class="col-sm-2 text-center skill error">{{ mySkill.Error }}</div>
+							<div class="col-sm-2 text-center skill termination">{{ mySkill.Termination }}</div>
+						</div>
 					</div>
 				</div>
 
 				<!-- Location Entry -->
-				<div class="col-lg-3 panel panel-default">
-					<div class="col-lg-12 panel-heading">Location</div>
-					<div class="panel-body">
-						<div class="col-lg-12 court" id="court">
-							<div id="locationOpponent"class="col-lg-12 myButton">Opponent</div>
-							<div class="col-lg-12 myButton">Attack Line</div>
-							<div class="col-lg-12 myButton">Attack Line</div>
-							<div id="locationOpponent"class="col-lg-12 myButton">Home</div>
-						</div>	
-					</div>				
-				</div>
-
-				<!-- Scoreboard -->
-				<div class="col-lg-3 panel panel-default">
-					<div class="col-lg-12 panel-heading">Score</div>
-					<div class="panel-body">
-						<div class="col-lg-3 score">-</div>
-						<div class="col-lg-6 score">0</div>
-						<div class="col-lg-3 score">+</div>
-						<div class="col-lg-12 panel-title">Home</div>
-					</div>
-
-					<div class="panel-body">
-						<div class="col-lg-3 score">-</div>
-						<div class="col-lg-6 score">0</div>
-						<div class="col-lg-3 score">+</div>
-						<div class="col-lg-12 panel-title">Opponent</div>
-					</div>
-					
-					<!-- Activity -->
-					<div class="panel-body">
-						<div class="col-lg-12 panel-title">Activity</div>
-						<div class="col-lg-12 input-group">
-							<span class="input-group-addon" id="basic-addon3">@</span>
-							<input size="35" type="text" id="pointTracker" class="form-control" placeholder="Point Details" aria-describedby="basic-addon4" name="pointTracker" id="pointTracker">
+				<div class="col-sm-3">
+					<div class="panel">
+						<div class="panel-heading">
+							<h3 class="panel-title">Location</h3>
 						</div>
-						<div class="col-lg-6" id="enterStream">enter</div>
-						<div class="col-lg-6" id="undoLast">undo</div>
+						<div class="panel-body">
+							<div class="court" id="court">
+								<div class="myButton">Opponent</div>
+								<div class="myButton attack">Attack Line</div>
+								<div class="myButton attack">Attack Line</div>
+								<div class="myButton">Home</div>
+							</div>	
+						</div>				
 					</div>
-
-						<!-- Activity Stream -->
-					<div class="panel-body">
-						<div class="col-lg-12" id="activityStream" class="activityStream"></div>
-					</div>
-
 				</div>
 					
 			</div>
