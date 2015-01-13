@@ -4,6 +4,13 @@ app.run(function($rootScope) {
   $rootScope.name = "VolleyDash";
 });
 
+app.controller('activityController', function($scope) {
+  $scope.activityInput = {
+    myInput : "Ready to track activity"
+  };
+});
+
+
 app.controller('TeamController', function($scope) {
   $scope.teamMembers = [
 		{"playerName" : "Emily",    "playerNumber" : "12",    "courtPosition" : 1, "playerPosition" : "S"},
@@ -16,6 +23,28 @@ app.controller('TeamController', function($scope) {
 		{"playerName" : "Peyton",   "playerNumber" : "14",    "courtPosition" : 0, "playerPosition" : "Opp"},
 		{"playerName" : "Courtney", "playerNumber" : "1",     "courtPosition" : 0, "playerPosition" : "DS"},
 		{"playerName" : "Mekenzi",  "playerNumber" : "11",    "courtPosition" : 0, "playerPosition" : "MB"}];
+
+    $scope.newPlayer = {'Name' : '', 'Number' : null, 'Position' : ''};
+
+    $scope.subPlayer = {'Mode' : false, 'Player' : {} };
+
+    $scope.subThisPlayer = function(member) {      
+      if ($scope.subPlayer.Mode && ($scope.subPlayer.Player == member)) {
+        $scope.subPlayer.Mode = false;
+      }
+      else {
+        $scope.subPlayer.Mode = true; 
+        $scope.subPlayer.Player = member;
+      }
+      return true;
+    };
+
+    $scope.addNewPlayer = function() {
+        $scope.teamMembers.push(
+          {'playerName' : $scope.newPlayer.Name, 'playerNumber' :$scope.newPlayer.Number, "courtPosition" : 0, 
+          "playerPosition" : $scope.newPlayer.Position}
+        );
+    };
 
     $scope.isOnCourt = function(player) {
         return player.courtPosition > 0;
@@ -35,6 +64,7 @@ app.controller('TeamController', function($scope) {
         return player.courtPosition;
     }
 
+
     $scope.rotate = function(j) {
     	for (i=0 ; i < $scope.teamMembers.length; i++) {
   			var player = $scope.teamMembers[i];
@@ -52,56 +82,8 @@ app.controller('SkillController', function($scope) {
     {"skill" : "Pass", "Good": "3", "Neutral": "2", "Poor": "1", "Error" : "0"},
     {"skill" : "Set", "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E"},
     {"skill" : "Attack",  "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E", "Termination" : "Kill"},
-    {"skill" : "Block",  "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E", "Termination" : "Block"},
-    {"skill" : "Block Assist",  "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E", "Termination" : "Block Assist"},
+    {"skill" : "Block", "Error": "E", "Termination" : "Block"},
+    {"skill" : "Block Assist", "Termination" : "Block Assist"},
     {"skill" : "Defense", "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E"}];
-});
-
-
-
-function translateCourtLocation(x,y,myImage) {
-  padding = 0;
-
-  xLocationInMeters = ((x - padding) / myImage.width() ) * 30; 
-  yLocationInMeters = ((y - padding) / myImage.height() ) * 60; 
-
-  if (yLocationInMeters < 30){
-    LocationType = 'Opponent';
-    yLocationInMeters = 30- yLocationInMeters;
-    xLocationInMeters = 30- xLocationInMeters;
-  }
-  else {
-    yLocationInMeters = yLocationInMeters - 30;
-    LocationType = "Home";
-  }
-
-  pointDetail['location']['side'] = LocationType;
-  pointDetail['location']['xval'] = xLocationInMeters.toFixed(2);
-  pointDetail['location']['yval'] = yLocationInMeters.toFixed(2);
-
-
-  //pointTracker.value = 'Player ' + pointDetail['playerNumber'] + " " + pointDetail['skill'] + " " + lookupSkillLabel[pointDetail['skill']][pointDetail['result']] + " " + pointDetail['location']['side'] + "(" + pointDetail['location']['xval'] + ', ' + pointDetail['location']['yval'] + ")";
-}
-
-
-$(function() {
-  $("#court").click(function(e) {
-
-    var offset = $(this).offset();
-    var relativeX = (e.pageX - offset.left);
-    var relativeY = (e.pageY - offset.top);
-
-  $("#court").append(
-        $('<div></div>')
-            .css('position', 'absolute')
-            .css('top', relativeY + 'px')
-            .css('left', relativeX + 'px')
-            .css('width', 8)
-            .css('height', 8)
-            .css('background-color', '#fff'));
-
-    translateCourtLocation(relativeX,relativeY, $(this) );
-    
-  });
 });
 
