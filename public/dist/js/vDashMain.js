@@ -8,6 +8,45 @@ app.controller('activityController', function($scope) {
   $scope.activityInput = {
     myInput : "Ready to track activity"
   };
+
+
+  $scope.activityLog = [
+      {
+        'player' : 'Sabrina',
+        'skill' : 'Set',
+        'result' : "+"
+      },      
+      {
+        'player' : 'Emily',
+        'skill' : 'Block'
+      },     
+      {
+        'player' : 'Maddie',
+        'skill' : 'Attack',
+        'result' : 'Error'
+      },    
+      {
+        'player' : 'Athena',
+        'skill' : 'Block'
+      },      
+      {
+        'player' : 'Karenna',
+        'skill' : 'Pass',
+        'result' : "3"
+      },     
+      {
+        'player' : 'MacKenzi',
+        'skill' : 'Attack'
+      }
+  ];
+
+  
+  $scope.removeActivity = function (index) {
+    var tmpList = angular.copy($scope.activityLog);
+    tmpList.splice(index, 1);
+    $scope.activityLog = tmpList;
+  }
+
 });
 
 
@@ -27,6 +66,8 @@ app.controller('TeamController', function($scope) {
     $scope.newPlayer = {'Name' : '', 'Number' : null, 'Position' : ''};
 
     $scope.subPlayer = {'Mode' : false, 'Player' : {} };
+
+    $scope.courtPositions = ["","RB","MB","LB","LF","MF","RF"];
 
     $scope.subThisPlayer = function(member) {      
       if ($scope.subPlayer.Mode && ($scope.subPlayer.Player == member)) {
@@ -62,8 +103,7 @@ app.controller('TeamController', function($scope) {
           return 6;
         }
         return player.courtPosition;
-    }
-
+    };
 
     $scope.rotate = function(j) {
     	for (i=0 ; i < $scope.teamMembers.length; i++) {
@@ -78,12 +118,23 @@ app.controller('TeamController', function($scope) {
 
 app.controller('SkillController', function($scope) {
   $scope.allSkills = [
-    {"skill" : "Serve", "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E", "Termination" : "Ace"},
-    {"skill" : "Pass", "Good": "3", "Neutral": "2", "Poor": "1", "Error" : "0"},
-    {"skill" : "Set", "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E"},
-    {"skill" : "Attack",  "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E", "Termination" : "Kill"},
+    {"skill" : "Serve", "Good": "+", "Fair": "0", "Poor": "-", "Error" : "E", "Termination" : "Ace"},
+    {"skill" : "Receive", "Good": "3", "Fair": "2", "Poor": "1", "Error" : "0"},
+    {"skill" : "Freeball", "Good": "3", "Fair": "2", "Poor": "1", "Error" : "0"},
+    {"skill" : "Set", "Good": "+", "Fair": "0", "Poor": "-", "Error" : "E"},
+    {"skill" : "Attack",  "Good": "+", "Fair": "0", "Poor": "-", "Error" : "E", "Termination" : "Kill"},
+    {"skill" : "Defense", "Good": "+", "Fair": "0", "Poor": "-", "Error" : "E"}, 
     {"skill" : "Block", "Error": "E", "Termination" : "Block"},
-    {"skill" : "Block Assist", "Termination" : "Block Assist"},
-    {"skill" : "Defense", "Good": "+", "Neutral": "/", "Poor": "-", "Error" : "E"}];
+    {"skill" : "Bl Assist", "Termination" : "Assist"}];
+
+    $scope.newSkill = {'Name' : '', 'Number' : null, 'Position' : ''};
+/*
+    $scope.addNewSkill = function() {
+        $scope.allSkills.push(
+          {'skill' : $scope.newSkill.Name, 'Good' :$scope.newSkill.Good, "Fair" : $scope.newSkill.Fair, 
+          "Poor" : $scope.newSkill.Poor, "Error" : $scope.newSkill.Error, "Termination" : $scope.newSkill.}
+        );
+    };
+    */
 });
 
