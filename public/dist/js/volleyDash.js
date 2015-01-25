@@ -242,11 +242,6 @@ END SET SKILLS
 
 
 
-/*
-
-
-
-
 
 
 
