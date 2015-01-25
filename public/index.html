@@ -6,98 +6,92 @@
 		<link href="../dist/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../dist/css/vDash.css" rel="stylesheet">
 	
-    	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    	<script type="text/javascript" src="dist/js/angular.min.js"></script>
     	<script type="text/javascript" src="dist/js/vDashMain.js"></script>
  	</head>
 
 	<body ng-app="myApp">
 		<div class="container-fluid" ng-controller="activityController">	
 			<!-- Header -->
-			<div class="row"><div class="col-sm-12 "><h2>{{ teamName }} vs. {{ opponentName }}</h2></div></div>
-			<div class="row"><div class="col-sm-12  infoLine">{{ activityInput.myInput }} {{member.playerName }}</div></div>
+			<div class="row text-center">
+				<div class="col-sm-3 scoreboard home">
+					<div class="score" ng-init="homeScore=0">
+						<button class="points substractPoint" ng-click="homeScore = homeScore - 1; activityInput.myInput = 'Point: ' + teamName + ' (' + homeScore + '-' + opponentScore + ')'"><span class="glyphicon glyphicon-minus-sign"></span></button>
+						{{ homeScore }}
+						<button class="points addPoint" ng-click="homeScore = homeScore + 1; activityInput.myInput = 'Point: ' + teamName + ' (' + homeScore + '-' + opponentScore + ')'"><span class="glyphicon glyphicon-plus-sign"></span></button>
+					</div>
+					<div>{{ teamName }}</div>
+				</div>
 
-			<div class="row mainContent">
-				<div class="col-sm-3 tile">
-				<!-- Set Match Information -->
-					<div class="col-sm-12">
-						<h3>Set Match Info</h3>
-						<label class="col-sm-3">Home</label>
-						<div class="col-sm-9">
-							<input type="text" ng-model="teamName"  placeholder="Enter Home Team Here" ng-init="teamName='Coast 14-1 Mizuno Luis'">
-						</div>
-						<label class="col-sm-3">Opponent</label>
-						<div class="col-sm-9">
-							<input type="text" ng-model="opponentName" placeholder="Enter Opponent Here" ng-init="opponentName='Opponent'">
-						</div>
-						<label class="col-sm-3">Set</label>
-						<div class="col-sm-9">
-							<input type="text" ng-model="set" placeholder="Enter Set Number Here" ng-init="set=1">
-						</div>
-					</div>				
+				<div class="col-sm-6">
+					
+					<div class="col-sm-5 header" ng-hide="editHomeName" ng-click="editHomeName=1">{{ teamName }}</div>		
+					<div class="col-sm-5" ng-show="editHomeName" ng-click="editHomeName=0">
+						<input type="text" ng-model="teamName"  placeholder="Enter Home Team Here" ng-init="teamName='Coast 14-1 Mizuno Luis'">
+					</div>
 
-				<!-- Scoreboard -->
-					<div class="col-sm-12 spacer">
-						<h3>Score</h3>				
-						<div class="scoreboard home">
-							<h4>{{ teamName }}</h4>
-							<div class="score" ng-init="homeScore=0">
-								<button class="points substractPoint" ng-click="homeScore = homeScore - 1; activityInput.myInput = 'Point: ' + teamName + ' (' + homeScore + '-' + opponentScore + ')'"><span class="glyphicon glyphicon-minus-sign"></span></button>
-								{{ homeScore }}
-								<button class="points addPoint" ng-click="homeScore = homeScore + 1; activityInput.myInput = 'Point: ' + teamName + ' (' + homeScore + '-' + opponentScore + ')'"><span class="glyphicon glyphicon-plus-sign"></span></button>
-							</div>
-						</div>
-						
-						<div class="scoreboard visitor">
-							<h4>{{ opponentName }}</h4>
-							<div class="score" ng-init="opponentScore=0">
-								<button class="points substractPoint" ng-click="opponentScore = opponentScore - 1;  activityInput.myInput = 'Point: ' + teamName + ' (' + homeScore + '-' + opponentScore + ')'"><span class="glyphicon glyphicon-minus-sign"></span></button>
-								{{ opponentScore }}
-								<button class="points addPoint" ng-click="opponentScore = opponentScore + 1;  activityInput.myInput = 'Point: ' + teamName + ' (' + homeScore + '-' + opponentScore + ')'"><span class="glyphicon glyphicon-plus-sign"></span></button>
-							</div>
-						</div>
+
+					<div class="col-sm-2 header"> vs. </div>
+					
+					<div class="col-sm-5 header" ng-hide="editOpponentName" ng-click="editOpponentName=1">{{ opponentName }}</div>
+					<div class="col-sm-5 header" ng-show="editOpponentName" ng-click="editOpponentName=0">
+						<input type="text" ng-model="opponentName" placeholder="Enter Opponent Here" ng-init="opponentName='Opponent'">
 					</div>
 				</div>
+
+
+<!--<input type="text" ng-model="set" placeholder="Enter Set Number Here" ng-init="set=1">-->
+
+				<div class="col-sm-3 scoreboard visitor">			
+					<div class="score" ng-init="opponentScore=0">
+							<button class="points substractPoint" ng-click="opponentScore = opponentScore - 1;  activityInput.myInput = 'Point: ' + teamName + ' (' + homeScore + '-' + opponentScore + ')'"><span class="glyphicon glyphicon-minus-sign"></span></button>
+							{{ opponentScore }}
+							<button class="points addPoint" ng-click="opponentScore = opponentScore + 1;  activityInput.myInput = 'Point: ' + teamName + ' (' + homeScore + '-' + opponentScore + ')'"><span class="glyphicon glyphicon-plus-sign"></span></button>
+					</div>
+					<div>{{ opponentName }}</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row mainContent">
 				
-				<div class="col-sm-4 tile" ng-controller="TeamController">
-				<!-- Player Number Entry -->
-					
+				<div class="col-sm-5 tile" ng-controller="TeamController">
+					<!-- Player Number Entry -->
 					<h3>Player</h3>
 					<div class="showBorder" ng-hide="subPlayer.Mode">
-						<div class="col-sm-1 showBorder" ng-click="rotate(1)"><span class="glyphicon glyphicon-repeat playerRotateGlyph"></span></div>
-						<div class="col-sm-10 showBorder">
+						<div class="col-sm-12 showBorder">
 							<div class="col-sm-4 player" ng-repeat="member in teamMembers | filter:isOnCourt | orderBy: getVisualOrder" ng-click="activityInput.myInput = member.playerName + '(#' + member.playerNumber + ') '">
-								<div>{{ member.playerName }}</div> 	
-								<div>#{{ member.playerNumber }}</div>
-								<div>{{ member.playerPosition }}</div>
+								<div class="col-sm-12 position text-left">{{ member.playerPosition }}</div>
+								<div class="col-sm-12 name text-center">{{ member.playerName }} </div> 	
+								<div class="col-sm-12 number text-right">{{ member.playerNumber }}</div>
+								<div class="col-sm-12 courtPos text-right">{{ courtPositions[member.courtPosition] }}</div>
 							</div>
 						</div>
-						<div class="col-sm-1 showBorder" ng-click="rotate(5)" ><span class="glyphicon glyphicon-repeat playerRotateGlyph flip"></span></div>
+						<div class="col-sm-6 showBorder" ng-click="rotate(1)"><span class="glyphicon glyphicon-repeat playerRotateGlyph">Rotate</span></div>
+						<div class="col-sm-6 showBorder" ng-click="rotate(5)" ><span class="glyphicon glyphicon-repeat playerRotateGlyph flip">Reverse</span></div>
 					</div>	
 
 					<div ng-show="subPlayer.Mode">
-						<div class="col-sm-1"></div>
-						<div class="col-sm-10">
+						<div class="col-sm-12">
 							<div class="col-sm-4 player" ng-repeat="member in teamMembers | filter:isOnCourt | orderBy: getVisualOrder" ng-click="subPlayer.Player.courtPosition = member.courtPosition; member.courtPosition = 0; subPlayer.Mode = false">
-								<div>{{ member.playerName }}</div> 	
-								<div>#{{ member.playerNumber }}</div>
-								<div>{{ member.playerPosition }}</div>
+								<div class="col-sm-12 position text-left">{{ member.playerPosition }}</div>
+								<div class="col-sm-12 name text-center">{{ member.playerName }} </div> 	
+								<div class="col-sm-12 number text-rig">{{ member.playerNumber }}</div>
 							</div>
 						</div>
-						<div class="col-sm-1"></span></div>	
 					</div>	
 				
-					<div class="col-sm-12"><span class="glyphicon glyphicon-road playerRotateGlyph"></span></div>
-			
-					<h4>Bench</h4> 
-					<div class="col-sm-1"></div>
-					<div class="col-sm-10">
+					<!-- Bench -->
+					
+					<div class="col-sm-12">
+						<h4>Bench</h4> 
 						<div class="col-sm-4 bench" ng-click="subThisPlayer(member)" ng-repeat="member in teamMembers | filter:isOnBench">
 							<div>{{ member.playerName }}</div> 
 							<div>#{{ member.playerNumber }}</div>
 						</div>
 						<div class="col-sm-4 playerAddGlyph" ng-click="addPlayer = 1"><span class="glyphicon glyphicon-plus playerAddGlyph"></span> Player</div>
 					</div>
-					<div class="col-sm-1"></div>
+
 
 					<div class="col-sm-12" ng-show="addPlayer">
 						<h4>Add a new player to bench</h4>
@@ -124,35 +118,81 @@
 					</div>
 
 					<div class="col-sm-12" ng-Show="subPlayer.Mode">Select a player on the court to make this substitution</div>
-					<div class="col-sm-12" ng-Show="subPlayer.Player.courtPosition > 0">{{ subPlayer.Player.Name }} subs in for {{ member.playerName }}</div>
-				
-				</div>			
-				
-				<div class="col-sm-3 tile" ng-controller="SkillController">
-				<!-- Skill and Result Entry -->
+					
+				</div>
+
+				<div class="col-sm-4 tile">
+					<div class="col-sm-12" ng-controller="SkillController">
+					<!-- Skill and Result Entry -->
 					<h3>Skill</h3>
 					<div class="skill" ng-repeat="mySkill in allSkills">
-						<div class="col-sm-4 text-left">{{ mySkill.skill }}</div>
-						<div class="col-sm-2 good results" ng-click="activityInput.myInput = activityInput.myInput + ' ' + mySkill.skill + ' ' + mySkill.Good">{{ mySkill.Good }}</div>
-						<div class="col-sm-2 neutral results" ng-click="activityInput.myInput = activityInput.myInput + ' ' + mySkill.skill + ' ' + mySkill.Neutral">{{ mySkill.Neutral }}</div>
-						<div class="col-sm-2 poor results" ng-click="activityInput.myInput = activityInput.myInput + ' ' + mySkill.skill + ' ' + mySkill.Poor">{{ mySkill.Poor }}</div>
-						<div class="col-sm-2 error results" ng-click="activityInput.myInput = activityInput.myInput + ' ' + mySkill.skill + ' ' + mySkill.Error">{{ mySkill.Error }}</div>
-						<div class="col-sm-12 termination" ng-hide="mySkill.Termination"></div>
-						<div class="col-sm-4" ng-show="mySkill.Termination"></div>
-						<div class="col-sm-8 termination results" ng-show="mySkill.Termination">{{ mySkill.Termination }}</div>
+						<div class="col-sm-12">
+							<div class="col-sm-2 termination results"><h3>{{ mySkill.Termination }}</h3></div>
+							<div class="col-sm-2 good results"><h3>{{ mySkill.Good }}</h3></div>
+							<div class="col-sm-4 fair results"><h3>{{ mySkill.Fair}}</h3>{{ mySkill.skill }}</div>
+							<div class="col-sm-2 poor results"><h3>{{ mySkill.Poor }}</h3></div>
+							<div class="col-sm-2 error results"><h3>{{ mySkill.Error }}</h3></div>
+						</div>
 					</div>
+
+						<div class="col-sm-12 playerAddGlyph" ng-click="skill = 1"><span class="glyphicon glyphicon-plus playerAddGlyph"></span> Skill</div>
+
+						<div class="col-sm-12" ng-show="skill">
+							<h4>Add a new skill to track</h4>
+							<div class="col-sm-8 ">
+								<label class="col-sm-3">Skill</label>
+								<div class="col-sm-9">
+									<input type="text" ng-model="newSkill.Name" placeholder="enter skill to track">
+								</div>
+									
+								<label class="col-sm-3">Good</label>
+								<div class="col-sm-9">
+									<input type="text" ng-model="newSkill.Good" placeholder="enter good result" value="+">
+								</div>
+							
+								<label class="col-sm-3">Fair</label>
+								<div class="col-sm-9">
+									<input type="text" ng-model="newSkill.fair" placeholder="enter fair result" value="0">
+								</div>
+
+								<label class="col-sm-3">Poor</label>
+								<div class="col-sm-9">
+									<input type="text" ng-model="newSkill.poor" placeholder="enter poor result" value="-">
+								</div>
+
+								<label class="col-sm-3">Error</label>
+								<div class="col-sm-9">
+									<input type="text" ng-model="newSkill.error" placeholder="enter error label" value="E">
+								</div>
+
+								<label class="col-sm-3">Termination</label>
+								<div class="col-sm-9">
+									<input type="text" ng-model="newSkill.terminate" placeholder="enter termination">
+								</div>
+							</div>
+							<div class="col-sm-6" ng-click="addSkill(); addSkill=0"><span class="glyphicon glyphicon-ok-sign playerRotateGlyph"></span>
+							</div>
+							<div class="col-sm-6" ng-click="addNewSkill(); addSkill=0"><span class="glyphicon glyphicon-remove-sign playerRotateGlyph"></span>
+							</div>
+						</div>
+					</div>
+
+				</div>		
+				
+				<div class="col-sm-3 tile">
+
+					<!-- Activity Stream -->
+					<div class="col-sm-12 infoLine">hello {{ activityInput.myInput }} {{member.playerName }}
+					<ul>
+						<li ng-repeat="activity in activityLog">
+							{{activity.player}} - {{ activity.skill}}  {{ activity.result}} <a href="" ng-click="removeActivity($index)">remove</a>
+						</li>
+					</ul>
+					</div>
+					<!-- Activity Log -->
 				</div>
 				
-				<div class="col-sm-3 tile"> <!-- ng-controller="LocationController"> -->
-				<!-- Location Entry -->
-					<h3>Location</h3>
-					<div class="court" id="court">
-						<div class="myButton">Opponent</div>
-						<div class="myButton attack">Attack Line</div>
-						<div class="myButton attack">Attack Line</div>
-						<div class="myButton">Home</div>
-					</div>	
-				</div>
+
 
 			</div>
 			
