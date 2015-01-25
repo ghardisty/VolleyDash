@@ -1,14 +1,7 @@
-body {
+ body {
 	color: #fff;
 }
 
-.header { 
-	color: rgba(0, 210, 241, 0.95);
-	font-family: "Trebuchet MS";
-	text-transform: uppercase;
-	font-weight: bolder;
-	font-size: 25px;
-}
 
 h3 { 
 	color: #ffc600;
@@ -53,6 +46,14 @@ label {
 	text-align: right;
 }
 
+.header { 
+	color: rgba(0, 210, 241, 0.95);
+	font-family: "Trebuchet MS";
+	text-transform: uppercase;
+	font-weight: bolder;
+	font-size: 25px;
+}
+
 .playerRotateGlyph {
 	color: #00d2f1;
 	font-size: 30px;
@@ -66,7 +67,7 @@ label {
 }
 
 .infoLine {
-	background-color: #fff;
+	background-color: #999;
 
 }
 
@@ -110,15 +111,9 @@ label {
 	-webkit-transform: scaleX(-1);
 	-ms-transform: scaleX(-1);
 }
+
 .scoreboard {
- color: #000;
-}
-.home {
-
-}
-
-.visitor {
-
+	color: #000;
 }
 
 .glyphicon-repeat {
@@ -159,7 +154,7 @@ label {
 
 
 .results {
-	height:40px;border-radius: 50px; font-family: georgia; font-size: 20px;  vertical-align: middle; text-align: center; padding: 20px;
+	height:40px;border-radius: 50px; font-family: georgia; font-size: 20px;  vertical-align: middle; text-align: center; padding: 0px;
 }
 .results:hover {background-color:  rgba(134, 38, 155, 0.95);}
 .results:active {background-color:  rgba(134, 38, 155, 0.95);}

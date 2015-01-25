@@ -118,12 +118,12 @@ app.controller('TeamController', function($scope) {
 
 app.controller('SkillController', function($scope) {
   $scope.allSkills = [
-    {"skill" : "Serve", "Good": "+", "Fair": "0", "Poor": "-", "Error" : "E", "Termination" : "Ace"},
-    {"skill" : "Receive", "Good": "3", "Fair": "2", "Poor": "1", "Error" : "0"},
-    {"skill" : "Freeball", "Good": "3", "Fair": "2", "Poor": "1", "Error" : "0"},
-    {"skill" : "Set", "Good": "+", "Fair": "0", "Poor": "-", "Error" : "E"},
-    {"skill" : "Attack",  "Good": "+", "Fair": "0", "Poor": "-", "Error" : "E", "Termination" : "Kill"},
-    {"skill" : "Defense", "Good": "+", "Fair": "0", "Poor": "-", "Error" : "E"}, 
+    {"skill" : "Serve", "Good": "+", "Fair": "O", "Poor": "-", "Error" : "E", "Termination" : "Ace"},
+    {"skill" : "Receive", "Good": "3", "Fair": "2", "Poor": "1", "Error" : "O"},
+    {"skill" : "Freeball", "Good": "3", "Fair": "2", "Poor": "1", "Error" : "O"},
+    {"skill" : "Set", "Good": "+", "Fair": "O", "Poor": "-", "Error" : "E"},
+    {"skill" : "Attack",  "Good": "+", "Fair": "O", "Poor": "-", "Error" : "E", "Termination" : "Kill"},
+    {"skill" : "Defense", "Good": "+", "Fair": "O", "Poor": "-", "Error" : "E"}, 
     {"skill" : "Block", "Error": "E", "Termination" : "Block"},
     {"skill" : "Bl Assist", "Termination" : "Assist"}];
 

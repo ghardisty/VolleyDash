@@ -127,12 +127,29 @@
 					<h3>Skill</h3>
 					<div class="skill" ng-repeat="mySkill in allSkills">
 						<div class="col-sm-12">
-							<div class="col-sm-2 termination results"><h3>{{ mySkill.Termination }}</h3></div>
-							<div class="col-sm-2 good results"><h3>{{ mySkill.Good }}</h3></div>
-							<div class="col-sm-4 fair results"><h3>{{ mySkill.Fair}}</h3>{{ mySkill.skill }}</div>
-							<div class="col-sm-2 poor results"><h3>{{ mySkill.Poor }}</h3></div>
-							<div class="col-sm-2 error results"><h3>{{ mySkill.Error }}</h3></div>
+							<div class="col-sm-4"><h4>{{ mySkill.skill}}</h4></div>
+							
+
+							<div class="col-sm-2 good results" ng-show="mySkill.Good">{{ mySkill.Good }}</div>
+							<div class="col-sm-2" ng-hide="mySkill.Good">{{ mySkill.Good }}</div>
+
+
+							<div class="col-sm-2 fair results" ng-show="mySkill.Fair">{{ mySkill.Fair }}</div>
+							<div class="col-sm-2" ng-hide="mySkill.Fair">{{ mySkill.Fair }}</div>
+							
+
+							<div class="col-sm-2 poor results" ng-show="mySkill.Poor">{{ mySkill.Poor }}</div>
+							<div class="col-sm-2" ng-hide="mySkill.Poor">{{ mySkill.Poor }}</div>
+
+							<div class="col-sm-2 error results" ng-show="mySkill.Error">{{ mySkill.Error }}</div>
+							<div class="col-sm-2" ng-hide="mySkill.Error">{{ mySkill.Error }}</div>
+
+							<div class="col-sm-8 col-sm-offset-4 termination results" ng-show="mySkill.Termination">{{ mySkill.Termination }}</div>
+							
+
+							
 						</div>
+						
 					</div>
 
 						<div class="col-sm-12 playerAddGlyph" ng-click="skill = 1"><span class="glyphicon glyphicon-plus playerAddGlyph"></span> Skill</div>
